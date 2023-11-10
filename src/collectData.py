@@ -8,6 +8,7 @@ Created on Tue Oct 24 10:53:42 2023
 import os
 import pandas as pd
 import datetime as dt
+import yfinance as yf
 
 from blp import blp
 
@@ -115,12 +116,23 @@ class DataCollector():
         countries = ["BE", "FR", "GE", "IT", "JN", "LU", "NE", "SP"]
         tickers = ["HOLD{} Index".format(country) for country in countries]
         self._collect_data(start_date = self.start_date, end_date = self.end_date, tickers = tickers, path = out_path)
+        
+    def yf_collect_jpyusd(self, start_date = None, end_date = None):
+        
+        if start_date != None: self.start_date = start_date
+        if end_date != None: self.end_date = end_date
+        
+        out_path = os.path.join(self.data_path, "usd_jpy.parquet")
+        tickers = ["JPY=X"]
+        df_tmp = yf.download(tickers = tickers, start =self.start_date, end = self.end_date)
+        df_tmp.to_parquet(path = out_path, engine = "pyarrow")
  
 if __name__ == "__main__":   
-    
+
     data_collector = DataCollector()
     data_collector.collect_eur_yield()
     data_collector.collect_hedge_cost()
     data_collector.collect_us_yield()
     data_collector.collect_jpy_yield()
     data_collector.collect_tsy_holder()
+    data_collector.yf_collect_jpyusd()
