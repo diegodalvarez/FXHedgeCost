@@ -15,3 +15,23 @@ Analysis of International Hedging Costs for UST. The overall goal is to find how
 
 ## Comparing opportunity cost of covered carry vs. Treasury Holding
 ![image](https://github.com/diegodalvarez/FXHedgeCost/assets/48641554/8cd78637-0b5a-4eea-921d-bb818a0e04a4)
+
+## Repo layout
+```bash
+    FXHedgeCost
+      └───notebook
+          │   FXHedgeCost.ipynb
+          │   FXHedgeCost10y.ipynb
+          │   JPYHolder.ipynb
+      └───src
+          │   collectData.py
+
+```
+
+src files:
+* ```collectData.py```: Collects data from Bloomberg Terminal
+
+notebook Files:
+* ```FXHedgeCost.ipynb```: Original file looking at hedge cost for overseas investors
+* ```FXHedgeCost10y.ipynb```: Hedged and unhedged rate differential with Treasury Holding data
+* ```JPYHolder.ipynb```: Analysis on JPY holdings and rate differential hedged and unhedged
